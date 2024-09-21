@@ -11,22 +11,24 @@ services:
     env_file: .env.example
     volumes:
       - pg_data:/var/lib/postgresql/data
+  
   backend:
     build: ./backend/
     env_file: .env.example
     volumes:
       - static:/backend_static
-      - media:/backend_media 
+      - media:/backend_media
+    expose:
+      - "8000"
+
   frontend:
-    env_file: .env.example
     build: ./frontend/
-    command: cp -r /app/build/. /static/
-    volumes:
-      - static:/frontend_static
+    env_file: .env.example
+
   gateway:
     build: ./nginx/
-    env_file: .env.example
-    ports:
-      - 9000:80
     volumes:
       - static:/staticfiles/
+      - media:/mediafiles/
+    ports:
+      - 9000:80
