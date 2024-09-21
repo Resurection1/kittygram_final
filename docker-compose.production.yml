@@ -16,23 +16,21 @@ services:
     image: podzorovmihail/kittygram_backend
     env_file: .env.example
     volumes:
-      - static_volume:/backend_static
-      - media_volume:/backend_media
-    expose:
-      - "8000"
+      - static:/static/
+      - media:/app/media/
 
   frontend:
     image: podzorovmihail/kittygram_frontend
     env_file: .env.example
-    command: cp -r /app/build/. /frontend_static/
+    command: cp -r /app/build/. /static/
     volumes:
-      - static_volume:/frontend_static
+      - static:/static
 
   gateway:
     image: podzorovmihail/kittygram_gateway
     env_file: .env.example
-    volumes:
-      - static_volume:/staticfiles/
-      - media_volume:/mediafiles/
     ports:
       - 9000:80
+    volumes:
+      - static:/static
+      - media:/app/media/

@@ -16,19 +16,20 @@ services:
     build: ./backend/
     env_file: .env.example
     volumes:
-      - static:/backend_static
-      - media:/backend_media
-    expose:
-      - "8000"
-
+      - static:/static/
+      - media:/app/media/
   frontend:
-    build: ./frontend/
     env_file: .env.example
+    build: ./frontend/
+    command: cp -r /app/build/. /static/
+    volumes:
+      - static:/static
 
   gateway:
     build: ./nginx/
-    volumes:
-      - static:/staticfiles/
-      - media:/mediafiles/
+    env_file: .env.example
     ports:
       - 9000:80
+    volumes:
+      - static:/static
+      - media:/app/media/
