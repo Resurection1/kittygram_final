@@ -1,8 +1,9 @@
 version: '3'
 
 volumes:
-  pg_data_production:
-  static_volume:
+  pg_data:
+  static:
+  media:
 
 
 services:
@@ -15,17 +16,18 @@ services:
     image: podzorovmihail/kittygram_backend
     env_file: .env.example
     volumes:
-      - static_volume:/backend_static
+      - static:/backend_static
+      - media:/backend_media
+    expose:
+      - "8000"
   frontend:
     image: podzorovmihail/kittygram_frontend
     env_file: .env.example
-    command: cp -r /app/build/. /frontend_static/
-    volumes:
-      - static_volume:/frontend_static
+
   gateway:
     image: podzorovmihail/kittygram_gateway
-    env_file: .env.example
     volumes:
-      - static_volume:/staticfiles/
+      - static:/staticfiles/
+      - media:/mediafiles/
     ports:
       - 9000:80
