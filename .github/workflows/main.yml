@@ -2,7 +2,6 @@ name: Main Kittygram workflow
 
 on: push
 jobs:
-  if: github.ref_name == 'main'
   tests:
     runs-on: ubuntu-latest
     strategy:
@@ -131,6 +130,7 @@ jobs:
       - build_frontend_and_push_to_docker_hub
       - build_gateway_and_push_to_docker_hub
     if: github.ref == 'refs/heads/main'
+    environment: production
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
