@@ -1,5 +1,5 @@
 # Kittygram — социальная сеть для обмена фотографиями любимых питомцев.
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+[![Main Kittygram workflow](https://github.com/Resurection1/kittygram_final/actions/workflows/main.yml/badge.svg)](https://github.com/Resurection1/kittygram_final/actions/workflows/main.yml)
 
 Пользователи могут регистрироваться, загружать фотографии с описанием и смотреть питомцев других пользователей.
 
